@@ -432,6 +432,9 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
                 mScrimBehind.getContext().getContentResolver(),
                 Settings.System.QS_TRANSPARENCY, 100,
                 UserHandle.USER_CURRENT) / 100);
+            for (ScrimState state : ScrimState.values()) {
+                state.setCustomScrimAlpha(mCustomScrimAlpha);
+            }
         }
         final ScrimState[] states = ScrimState.values();
         for (int i = 0; i < states.length; i++) {
