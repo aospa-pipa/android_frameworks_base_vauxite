@@ -91,4 +91,8 @@
     <!-- Build properties from a GMS certified device against current platform SPL level -->
     <java-symbol type="array" name="config_certifiedBuildProperties" />
 
+    <!-- Define device configs on boot -->
+    <java-symbol type="array" name="global_device_configs_override" />
+    <java-symbol type="array" name="device_configs_override" />
+
 </resources>
