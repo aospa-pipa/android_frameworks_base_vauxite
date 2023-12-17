@@ -36,6 +36,7 @@ import android.hardware.display.DisplayManagerInternal.DisplayPowerRequest;
 import android.os.PowerManager;
 import android.os.PowerManagerInternal;
 import android.os.PowerSaveState;
+import android.os.SystemProperties;
 import android.os.Trace;
 import android.util.Slog;
 import android.view.Display;
@@ -276,6 +277,16 @@ public class PowerGroup {
     }
 
     boolean sleepLocked(long eventTime, int uid, @PowerManager.GoToSleepReason int reason) {
+        if (reason == PowerManager.GO_TO_SLEEP_REASON_LID_SWITCH) {
+            boolean disableLidState =
+                    SystemProperties.getBoolean("persist.debug.disable_lid_state", false);
+            if (disableLidState) {
+                Slog.i(TAG,
+                        "Ignored power group (groupId=" + getGroupId() + ", uid=" + uid + ", reason="
+                                + PowerManager.sleepReasonToString(reason) + ")...");
+                return false;
+            }
+        }
         if (eventTime < mLastWakeTime || getWakefulnessLocked() == WAKEFULNESS_ASLEEP) {
             return false;
         }
