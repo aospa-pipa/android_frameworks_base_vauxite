@@ -88,4 +88,7 @@
     <!-- Whether to to intercept inputs on screen off. -->
     <java-symbol type="bool" name="config_enableKeyHandler" />
 
+    <!-- Build properties from a GMS certified device against current platform SPL level -->
+    <java-symbol type="array" name="config_certifiedBuildProperties" />
+
 </resources>
