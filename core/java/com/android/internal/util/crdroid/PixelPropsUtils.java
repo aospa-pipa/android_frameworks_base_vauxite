@@ -382,7 +382,7 @@ public final class PixelPropsUtils {
     }
 
     private static void spoofBuildGms() {
-        if (!SystemProperties.getBoolean(SPOOF_PIXEL_PI, true))
+        if (!SystemProperties.getBoolean(SPOOF_PIXEL_PI, false))
             return;
         // Alter build parameters to avoid hardware attestation enforcement
         setPropValue("MANUFACTURER", "Google");
@@ -407,7 +407,7 @@ public final class PixelPropsUtils {
     }
 
     public static void onEngineGetCertificateChain() {
-        if (!SystemProperties.getBoolean(SPOOF_PIXEL_PI, true))
+        if (!SystemProperties.getBoolean(SPOOF_PIXEL_PI, false))
             return;
         // Check stack for SafetyNet or Play Integrity
         if (isCallerSafetyNet() || sIsFinsky) {
